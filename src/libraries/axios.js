@@ -1,15 +1,9 @@
 import axios from 'axios';
 
-const {
-  REACT_APP_TMDB_BASE_URL,
-  REACT_APP_TMDB_API_KEY,
-} = process.env;
+const { REACT_APP_LUT_BACKEND_URL } = process.env;
 
-const tmdbInstance = axios.create({
-  baseURL: REACT_APP_TMDB_BASE_URL,
-  params: {
-    api_key: REACT_APP_TMDB_API_KEY,
-  },
+const lutInstance = axios.create({
+  baseURL: REACT_APP_LUT_BACKEND_URL,
 });
 
-export default tmdbInstance;
+export default lutInstance;
