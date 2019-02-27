@@ -8,13 +8,14 @@ const signinError = error => ({
   error,
 });
 
-const signinSuccess = user => (dispatch) => {
+const signinSuccess = googleUser => (dispatch) => {
   dispatch(signinRequest());
 
   return lutInstance({
     method: 'post',
-    url: 'auth/signin',
-  }).then(() => {
+    url: 'authentication/login',
+    data: { user: googleUser },
+  }).then(({ data: { user } }) => {
     dispatch({
       type: SIGNIN_SUCCESS,
       user,
