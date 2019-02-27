@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
+import throttle from 'lodash/throttle';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import rootReducers from './reducers';
 
 import App from './modules/App';
+import { loadState, saveState } from './libraries/localstorage';
 import * as serviceWorker from './serviceWorker';
 
 /* eslint-disable no-underscore-dangle */
@@ -21,8 +23,19 @@ const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 const store = createStore(
   rootReducers,
+  loadState(),
   enhancer,
 );
+
+// Save authentication data in localstorage
+store.subscribe(() => {
+  throttle(
+    saveState({
+      authentication: store.getState().authentication,
+    }),
+    1000,
+  );
+});
 
 const brownColor = {
   light: '#F1DBBF',

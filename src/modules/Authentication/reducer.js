@@ -19,13 +19,6 @@ const authenticationReducer = (state = initialState, { type, user }) => {
         data: null,
       };
 
-    case SIGNIN_ERROR:
-      return {
-        loading: false,
-        error: true,
-        data: null,
-      };
-
     case SIGNIN_SUCCESS:
       return {
         loading: false,
@@ -33,6 +26,12 @@ const authenticationReducer = (state = initialState, { type, user }) => {
         data: user,
       };
 
+    case SIGNIN_ERROR:
+      return {
+        loading: false,
+        error: true,
+        data: null,
+      };
 
     default:
       return state;
