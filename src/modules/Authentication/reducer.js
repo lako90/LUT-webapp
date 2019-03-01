@@ -5,12 +5,12 @@ import {
 } from './constants';
 
 const initialState = {
-  loading: false,
+  loading: true,
   error: false,
   data: null,
 };
 
-const authenticationReducer = (state = initialState, { type, user }) => {
+const authenticationReducer = (state = initialState, { type, user, error }) => {
   switch (type) {
     case SIGNIN_REQUEST:
       return {
@@ -29,7 +29,7 @@ const authenticationReducer = (state = initialState, { type, user }) => {
     case SIGNIN_ERROR:
       return {
         loading: false,
-        error: true,
+        error,
         data: null,
       };
 

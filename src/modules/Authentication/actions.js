@@ -25,8 +25,25 @@ const signinSuccess = googleUser => (dispatch) => {
   });
 };
 
+const checkToken = () => (dispatch) => {
+  dispatch(signinRequest());
+
+  return lutInstance({
+    method: 'post',
+    url: 'authentication/check',
+  }).then(({ data: { user } }) => {
+    dispatch({
+      type: SIGNIN_SUCCESS,
+      user,
+    });
+  }).catch(({ response }) => {
+    dispatch(signinError(response));
+  });
+};
+
 export {
   signinRequest,
   signinSuccess,
   signinError,
+  checkToken,
 };

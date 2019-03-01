@@ -1,68 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import throttle from 'lodash/throttle';
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
-import rootReducers from './reducers';
+import store from './store';
+import theme from './theme';
 
 import App from './modules/App';
-import { loadState, saveState } from './libraries/localstorage';
+
 import * as serviceWorker from './serviceWorker';
-
-/* eslint-disable no-underscore-dangle */
-const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-  : compose;
-/* eslint-enable no-underscore-dangle */
-
-const enhancer = composeEnhancers(applyMiddleware(thunk));
-
-const store = createStore(
-  rootReducers,
-  loadState(),
-  enhancer,
-);
-
-// Save authentication data in localstorage
-store.subscribe(() => {
-  throttle(
-    saveState({
-      authentication: store.getState().authentication,
-    }),
-    1000,
-  );
-});
-
-const brownColor = {
-  light: '#F1DBBF',
-  medium: '#5E4F3A',
-  dark: '#382205',
-};
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: brownColor.dark,
-      text: 'red',
-      contrastText: brownColor.light,
-    },
-    secondary: {
-      main: brownColor.medium,
-      contrastText: brownColor.light,
-    },
-  },
-  typography: {
-    useNextVariants: true,
-    fontFamily: [
-      'Mali',
-      'cursive',
-    ].join(','),
-  },
-});
 
 /* eslint-disable react/jsx-filename-extension */
 ReactDOM.render(

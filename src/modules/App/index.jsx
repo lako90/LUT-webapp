@@ -1,9 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { withStyles } from '@material-ui/core/styles';
 
+import { checkToken as checkTokenAction } from '../Authentication/actions';
+
+import Loading from '../../components/Loading';
 import Authenticated from './Authenticated';
 import Authentication from '../Authentication';
 
@@ -24,6 +28,9 @@ const styles = ({ spacing, breakpoints }) => ({
 class App extends Component {
   static propTypes = {
     classes: PropTypes.shape().isRequired,
+    app: PropTypes.shape({
+      loading: PropTypes.bool,
+    }).isRequired,
     authentication: PropTypes.shape({
       data: PropTypes.shape(),
       loading: PropTypes.bool,
@@ -32,19 +39,28 @@ class App extends Component {
         PropTypes.bool,
       ]),
     }).isRequired,
+    checkToken: PropTypes.func.isRequired,
+  }
+
+  componentDidMount() {
+    const { checkToken } = this.props;
+
+    checkToken();
   }
 
   render() {
     const {
       classes,
-      authentication,
+      app: { loading },
+      authentication: { data: userData },
     } = this.props;
 
     return (
       <Fragment>
+        <Loading active={loading} />
         <div className={classes.layout}>
           {
-            authentication.data
+            userData
               ? <Authenticated />
               : <Authentication />
           }
@@ -54,8 +70,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ authentication }) => ({ authentication });
+const mapStateToProps = ({ app, authentication }) => ({ app, authentication });
+const mapDispatchToProp = dispatch => ({
+  checkToken: bindActionCreators(checkTokenAction, dispatch),
+});
 
-export default connect(mapStateToProps)(
+export default connect(mapStateToProps, mapDispatchToProp)(
   withStyles(styles)(App),
 );

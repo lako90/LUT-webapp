@@ -1,19 +1,26 @@
 const loadState = () => {
   try {
-    const serializedState = localStorage.getItem('state');
-    if (serializedState === null) {
-      return undefined;
-    }
-    return JSON.parse(serializedState);
+    const serializedAccessToken = localStorage.getItem('accessToken');
+    const serializedRefreshToken = localStorage.getItem('refreshToken');
+
+    return (serializedAccessToken && serializedRefreshToken)
+      ? {
+        accessToken: JSON.parse(serializedAccessToken),
+        refreshToken: JSON.parse(serializedRefreshToken),
+      }
+      : {};
   } catch (err) {
-    return undefined;
+    return {};
   }
 };
 
-const saveState = (state) => {
+const saveState = ({ accessToken, refreshToken }) => {
   try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem('state', serializedState);
+    const serializedAccessToken = JSON.stringify(accessToken);
+    const serializedRefreshToken = JSON.stringify(refreshToken);
+
+    localStorage.setItem('accessToken', serializedAccessToken);
+    localStorage.setItem('refreshToken', serializedRefreshToken);
   } catch (error) {
     console.error(error);
   }
