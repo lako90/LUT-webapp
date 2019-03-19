@@ -8,9 +8,9 @@ import { withStyles } from '@material-ui/core/styles';
 import { checkToken as checkTokenAction } from '../Authentication/actions';
 import { propType as authenticationPropType } from '../Authentication/reducer';
 
-import Loading from '../../components/Loading';
 import Authenticated from '../Authenticated';
 import Authentication from '../Authentication';
+import Loading from '../../components/Loading';
 
 import styles from './styles';
 
