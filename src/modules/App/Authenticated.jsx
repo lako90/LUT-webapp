@@ -1,16 +1,21 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import MainBar from '../../components/MainBar';
+import CharacterList from '../Character/CharacterList';
 
 class Authenticated extends Component {
   render() {
     return (
-      <Fragment>
+      <Router>
         <MainBar />
         <main>
-          {null}
+          <Route
+            path="/characters"
+            component={CharacterList}
+          />
         </main>
-      </Fragment>
+      </Router>
     );
   }
 }

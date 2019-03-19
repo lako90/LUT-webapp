@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
@@ -65,7 +66,9 @@ class MainDrawer extends Component {
             <ListItemIcon>
               <MailIcon />
             </ListItemIcon>
-            <ListItemText primary={'Lorem ipsum text'} />
+            <Link to={'/characters'}>
+              <ListItemText primary={'Characters'} />
+            </Link>
           </ListItem>
         </List>
       </SwipeableDrawer>
