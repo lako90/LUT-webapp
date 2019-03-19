@@ -13,12 +13,6 @@ import {
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 
 class Authentication extends Component {
-  static propTypes = {
-    signinRequest: PropTypes.func.isRequired,
-    signinSuccess: PropTypes.func.isRequired,
-    signinError: PropTypes.func.isRequired,
-  }
-
   handleRequest = () => {
     const { signinRequest } = this.props;
     signinRequest();
@@ -47,6 +41,12 @@ class Authentication extends Component {
     );
   }
 }
+
+Authentication.propTypes = {
+  signinRequest: PropTypes.func.isRequired,
+  signinSuccess: PropTypes.func.isRequired,
+  signinError: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = dispatch => ({

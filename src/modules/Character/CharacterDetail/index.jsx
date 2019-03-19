@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 
-class Character extends Component {
-  static propTypes = {
-
-  };
-
+class CharacterDetail extends Component {
   render() {
     return (
       <div />
@@ -13,4 +9,8 @@ class Character extends Component {
   }
 }
 
-export default Character;
+CharacterDetail.propTypes = {
+
+};
+
+export default CharacterDetail;

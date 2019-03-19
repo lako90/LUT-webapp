@@ -4,22 +4,15 @@ import classNames from 'classnames';
 
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+
 import MenuIcon from '@material-ui/icons/Menu';
 
-const styles = () => ({
-  menuButton: {
-    marginRight: 20,
-    transition: 'margin .25s',
-  },
-  hide: {
-    marginLeft: '-125px',
-  },
-});
+import styles from './styles';
 
 class BurgerMenuIcon extends Component {
   render() {
     const {
-      classes: { menuButton, hide },
+      classes: { menuButton, slideLeft },
       drawerOpen,
       onClick,
     } = this.props;
@@ -29,7 +22,7 @@ class BurgerMenuIcon extends Component {
         color="inherit"
         aria-label="Open drawer"
         onClick={onClick}
-        className={classNames(menuButton, drawerOpen && hide)}
+        className={classNames(menuButton, drawerOpen && slideLeft)}
       >
         <MenuIcon />
       </IconButton>

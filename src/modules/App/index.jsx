@@ -9,33 +9,12 @@ import { checkToken as checkTokenAction } from '../Authentication/actions';
 import { propType as authenticationPropType } from '../Authentication/reducer';
 
 import Loading from '../../components/Loading';
-import Authenticated from './Authenticated';
+import Authenticated from '../Authenticated';
 import Authentication from '../Authentication';
 
-const styles = ({ spacing, breakpoints }) => ({
-  layout: {
-    width: 'auto',
-    marginTop: spacing.unit * 3,
-    marginLeft: spacing.unit * 3,
-    marginRight: spacing.unit * 3,
-    [breakpoints.up(1100 + spacing.unit * 3 * 2)]: {
-      width: 1100,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
-  },
-});
+import styles from './styles';
 
 class App extends Component {
-  static propTypes = {
-    classes: PropTypes.shape().isRequired,
-    app: PropTypes.shape({
-      loading: PropTypes.bool,
-    }).isRequired,
-    authentication: authenticationPropType.isRequired,
-    checkToken: PropTypes.func.isRequired,
-  }
-
   componentDidMount() {
     const { checkToken } = this.props;
 
@@ -44,7 +23,7 @@ class App extends Component {
 
   render() {
     const {
-      classes,
+      classes: { layout },
       app: { loading },
       authentication: { data: userData },
     } = this.props;
@@ -52,7 +31,7 @@ class App extends Component {
     return (
       <Fragment>
         <Loading active={loading} />
-        <div className={classes.layout}>
+        <div className={layout}>
           {
             userData
               ? <Authenticated />
@@ -64,11 +43,18 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+  classes: PropTypes.shape().isRequired,
+  app: PropTypes.shape({
+    loading: PropTypes.bool,
+  }).isRequired,
+  authentication: authenticationPropType.isRequired,
+  checkToken: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = ({ app, authentication }) => ({ app, authentication });
 const mapDispatchToProp = dispatch => ({
   checkToken: bindActionCreators(checkTokenAction, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProp)(
-  withStyles(styles)(App),
-);
+export default connect(mapStateToProps, mapDispatchToProp)(withStyles(styles)(App));

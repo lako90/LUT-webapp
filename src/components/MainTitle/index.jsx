@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-const styles = () => ({
-  grow: { flexGrow: 1 },
-});
+import commonStyles from '../../styles';
 
 class MainTitle extends Component {
   render() {
@@ -36,4 +34,4 @@ MainTitle.defaultProps = {
   title: 'LUT | Unofficial app',
 };
 
-export default withStyles(styles)(MainTitle);
+export default withStyles(commonStyles)(MainTitle);

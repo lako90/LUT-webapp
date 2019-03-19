@@ -7,12 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-const styles = () => ({
-  avatar: {
-    width: 40,
-    height: 40,
-  },
-});
+import styles from './styles';
 
 class ProfileIcon extends Component {
   state = {
@@ -62,7 +57,7 @@ class ProfileIcon extends Component {
           onClose={this.closeProfileMenu}
         >
           <MenuItem onClick={this.closeProfileMenu}>{'Profile'}</MenuItem>
-          <MenuItem onClick={this.closeProfileMenu}>{'My account'}</MenuItem>
+          <MenuItem onClick={this.closeProfileMenu}>{'Logout'}</MenuItem>
         </Menu>
       </Fragment>
     );

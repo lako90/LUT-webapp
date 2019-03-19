@@ -11,26 +11,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 
-// Icons
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MailIcon from '@material-ui/icons/Mail';
 
-const drawerWidth = 240;
-
-const styles = theme => ({
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
-});
+import styles from './styles';
 
 class MainDrawer extends Component {
   render() {
@@ -60,16 +45,27 @@ class MainDrawer extends Component {
             }
           </IconButton>
         </div>
+
         <Divider />
+
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <MailIcon />
-            </ListItemIcon>
-            <Link to={'/characters'}>
-              <ListItemText primary={'Characters'} />
-            </Link>
-          </ListItem>
+          <Link to={'/characters'}>
+            <ListItem button>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Personaggi'} />
+            </ListItem>
+          </Link>
+
+          <Link to={'/equipments'}>
+            <ListItem button>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Equipaggiamento'} />
+            </ListItem>
+          </Link>
         </List>
       </SwipeableDrawer>
     );

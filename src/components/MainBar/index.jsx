@@ -1,13 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import MainTitle from '../MainTitle';
 import BurgerMenuIcon from '../BurgerMenuIcon';
 import MainDrawer from '../MainDrawer';
+import MainTitle from '../MainTitle';
 import ProfileIcon from '../ProfileIcon';
 
 import { propType as authenticationPropType } from '../../modules/Authentication/reducer';
