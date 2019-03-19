@@ -3,12 +3,10 @@ const loadState = () => {
     const serializedAccessToken = localStorage.getItem('accessToken');
     const serializedRefreshToken = localStorage.getItem('refreshToken');
 
-    return (serializedAccessToken && serializedRefreshToken)
-      ? {
-        accessToken: JSON.parse(serializedAccessToken),
-        refreshToken: JSON.parse(serializedRefreshToken),
-      }
-      : {};
+    return {
+      accessToken: serializedAccessToken && JSON.parse(serializedAccessToken),
+      refreshToken: serializedRefreshToken && JSON.parse(serializedRefreshToken),
+    };
   } catch (err) {
     return {};
   }

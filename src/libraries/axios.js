@@ -13,11 +13,8 @@ const lutInstance = axios.create({
 
       headers['Content-Type'] = 'application/json';
       headers['Accept'] = 'application/json';
-
-      if (accessToken && refreshToken) {
-        headers['access-token'] = `Bearer ${accessToken}`;
-        headers['refresh-token'] = refreshToken;
-      }
+      headers['access-token'] = accessToken && `Bearer ${accessToken}`;
+      headers['refresh-token'] = refreshToken;
 
       return JSON.stringify(data);
     },
