@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 
 import { checkToken as checkTokenAction } from '../Authentication/actions';
+import { propType as authenticationPropType } from '../Authentication/reducer';
 
 import Loading from '../../components/Loading';
 import Authenticated from './Authenticated';
@@ -31,14 +32,7 @@ class App extends Component {
     app: PropTypes.shape({
       loading: PropTypes.bool,
     }).isRequired,
-    authentication: PropTypes.shape({
-      data: PropTypes.shape(),
-      loading: PropTypes.bool,
-      error: PropTypes.oneOfType([
-        PropTypes.shape(),
-        PropTypes.bool,
-      ]),
-    }).isRequired,
+    authentication: authenticationPropType.isRequired,
     checkToken: PropTypes.func.isRequired,
   }
 

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   SIGNIN_REQUEST,
   SIGNIN_SUCCESS,
@@ -38,4 +39,14 @@ const authenticationReducer = (state = initialState, { type, user, error }) => {
   }
 };
 
+const propType = PropTypes.shape({
+  data: PropTypes.shape(),
+  loading: PropTypes.bool,
+  error: PropTypes.oneOfType([
+    PropTypes.shape(),
+    PropTypes.bool,
+  ]),
+});
+
 export default authenticationReducer;
+export { propType };
