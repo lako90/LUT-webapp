@@ -21,14 +21,15 @@ const lutInstance = axios.create({
   ],
   transformResponse: [
     (data) => {
-      const { user } = JSON.parse(data);
+      const parsedData = JSON.parse(data);
+      const { user } = parsedData;
 
       if (user) {
         const { accessToken, refreshToken } = user;
         saveState({ accessToken, refreshToken });
       }
 
-      return JSON.parse(data);
+      return parsedData;
     },
   ],
 });

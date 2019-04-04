@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -9,12 +9,12 @@ import MainDrawer from '../MainDrawer';
 import MainTitle from '../MainTitle';
 import ProfileIcon from '../ProfileIcon';
 
+import DrawerContext from './drawerContext';
+
 import { propType as authenticationPropType } from '../../modules/Authentication/reducer';
 
 class MainBar extends Component {
-  state = {
-    drawerOpen: false,
-  }
+  state = { drawerOpen: false }
 
   openDrawer = () => { this.setState({ drawerOpen: true }); }
 
@@ -25,10 +25,15 @@ class MainBar extends Component {
     const { authentication: { data: profileData } } = this.props;
 
     return (
-      <Fragment>
+      <DrawerContext.Provider
+        value={{
+          openDrawer: this.openDrawer,
+          closeDrawer: this.closeDrawer,
+          drawerOpen,
+        }}
+      >
         <AppBar position={'fixed'} color={'secondary'}>
           <Toolbar>
-
             <BurgerMenuIcon
               drawerOpen={drawerOpen}
               onClick={this.openDrawer}
@@ -49,7 +54,7 @@ class MainBar extends Component {
           closeDrawer={this.closeDrawer}
           openDrawer={this.openDrawer}
         />
-      </Fragment>
+      </DrawerContext.Provider>
     );
   }
 }
