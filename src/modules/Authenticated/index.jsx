@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { withStyles } from '@material-ui/core/styles';
 
 import CharacterList from '../Character/CharacterList';
+import CharacterDetail from '../Character/CharacterDetail';
 import MainBar from '../../components/MainBar';
 
 import styles from './styles';
@@ -17,14 +18,20 @@ class Authenticated extends Component {
       <Fragment>
         <MainBar />
         <main className={content}>
-          <Route
-            path="/characters"
-            component={CharacterList}
-          />
-          <Route
-            path="/equipments"
-            component={CharacterList}
-          />
+          <Switch>
+            <Route
+              path="/characters"
+              component={CharacterList}
+            />
+            <Route
+              path="/characters/:id"
+              component={CharacterDetail}
+            />
+            <Route
+              path="/equipments"
+              component={CharacterList}
+            />
+          </Switch>
         </main>
       </Fragment>
     );

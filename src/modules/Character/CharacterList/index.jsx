@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -24,11 +25,13 @@ class CharacterList extends Component {
     race: { name: raceName },
     class: { name: className },
   }) => (
-    <ListItem key={id}>
-      <ListItemText>
-        {`${name} - ${raceName} ${className}`}
-      </ListItemText>
-    </ListItem>
+    <Link key={id} to={`characters/${id}`}>
+      <ListItem>
+        <ListItemText>
+          {`${name} - ${raceName} ${className}`}
+        </ListItemText>
+      </ListItem>
+    </Link>
   )
 
   render() {
