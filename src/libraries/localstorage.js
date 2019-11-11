@@ -7,7 +7,10 @@ const loadState = () => {
       accessToken: serializedAccessToken && JSON.parse(serializedAccessToken),
       refreshToken: serializedRefreshToken && JSON.parse(serializedRefreshToken),
     };
-  } catch (err) {
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+
     return {};
   }
 };
@@ -20,6 +23,7 @@ const saveState = ({ accessToken, refreshToken }) => {
     localStorage.setItem('accessToken', serializedAccessToken);
     localStorage.setItem('refreshToken', serializedRefreshToken);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
   }
 };

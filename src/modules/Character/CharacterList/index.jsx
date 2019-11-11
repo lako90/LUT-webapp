@@ -18,10 +18,15 @@ class CharacterList extends Component {
     getCharacters();
   }
 
-  renderCharacterRow = ({ name }) => (
-    <ListItem key={name}>
+  renderCharacterRow = ({
+    id,
+    name,
+    race: { name: raceName },
+    class: { name: className },
+  }) => (
+    <ListItem key={id}>
       <ListItemText>
-        {name}
+        {`${name} - ${raceName} ${className}`}
       </ListItemText>
     </ListItem>
   )
@@ -31,7 +36,14 @@ class CharacterList extends Component {
 
     return (
       <Fragment>
-        <PageTitle title={'Personaggi'} />
+        <PageTitle
+          title={'Personaggi'}
+          action={{
+            icon: 'add',
+            label: 'Crea nuovo',
+            linkTo: '/characters/add',
+          }}
+        />
         <List component={'nav'}>
           {
             characters
@@ -49,7 +61,7 @@ CharacterList.propTypes = {
   getCharacters: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ characters: { data } }) => ({ characters: data });
+const mapStateToProps = ({ characters: { data: characters } }) => ({ characters });
 
 const mapDispatchToProps = dispatch => ({
   getCharacters: bindActionCreators(getCharactersAction, dispatch),

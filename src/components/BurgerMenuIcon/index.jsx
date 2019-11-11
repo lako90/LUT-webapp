@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -9,26 +9,20 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import styles from './styles';
 
-class BurgerMenuIcon extends Component {
-  render() {
-    const {
-      classes: { menuButton, slideLeft },
-      drawerOpen,
-      onClick,
-    } = this.props;
-
-    return (
-      <IconButton
-        color="inherit"
-        aria-label="Open drawer"
-        onClick={onClick}
-        className={classNames(menuButton, drawerOpen && slideLeft)}
-      >
-        <MenuIcon />
-      </IconButton>
-    );
-  }
-}
+const BurgerMenuIcon = ({
+  classes: { menuButton, slideLeft },
+  drawerOpen,
+  onClick,
+}) => (
+  <IconButton
+    color="inherit"
+    aria-label="Open drawer"
+    onClick={onClick}
+    className={classNames(menuButton, drawerOpen && slideLeft)}
+  >
+    <MenuIcon />
+  </IconButton>
+);
 
 BurgerMenuIcon.propTypes = {
   classes: PropTypes.shape().isRequired,
