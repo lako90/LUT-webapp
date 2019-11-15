@@ -15,7 +15,7 @@ import App from './modules/App';
  */
 // import * as serviceWorker from './serviceWorker';
 
-/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable react/jsx-filename-extension, no-undef */
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
@@ -26,7 +26,7 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
-/* eslint-enable react/jsx-filename-extension */
+/* eslint-enable react/jsx-filename-extension, no-undef */
 
 // Learn more about service workers: http://bit.ly/CRA-PWA
 // serviceWorker.register();

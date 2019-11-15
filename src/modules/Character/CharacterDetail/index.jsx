@@ -1,17 +1,38 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+
+import { getCharacterByIdSelector } from '../selectors';
 
 const CharacterDetail = () => {
   const { id } = useParams();
-  console.log("TCL: CharacterDetail -> props", id)
-  return (
-    <div>{'eccolo'}</div>
-  );
-}
+  const character = useSelector(getCharacterByIdSelector(id));
 
-CharacterDetail.propTypes = {
+  if (character) {
+    const {
+      name,
+      race: { name: raceName },
+      class: { name: className },
+    } = character;
 
+    return (
+      <Grid container>
+        <Grid item xs>
+          <Paper>
+            {name}
+            <br />
+            <p>{`${raceName} ${className}`}</p>
+          </Paper>
+        </Grid>
+        <Grid item xs />
+      </Grid>
+    );
+  }
+
+  return null;
 };
 
 export default CharacterDetail;
