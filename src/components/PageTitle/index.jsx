@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -17,42 +17,39 @@ const StyledTitle = styled.div`
   align-items: flex-end;
 `;
 
-class PageTitle extends Component {
-  renderIcon = icon => icon && <Icon>{icon}</Icon>
+const PageTitle = ({ action, title }) => {
+  const renderIcon = icon => icon && <Icon>{icon}</Icon>;
 
-  render() {
-    const { action, title } = this.props;
-    const { icon, label, linkTo } = action;
+  const { icon, label, linkTo } = action;
 
-    return (
-      <Fragment>
-        <StyledTitle>
-          <Typography
-            variant={'h6'}
-            color={'inherit'}
-          >
-            {title}
-          </Typography>
-          {Object.keys(action).length
-            ? (
-              <Button
-                component={false}
-                linkTo={linkTo}
-                size={'small'}
-                square
-              >
-                {this.renderIcon(icon)}
-                {label}
-              </Button>
-            )
-            : null
-          }
-        </StyledTitle>
-        <Divider />
-      </Fragment>
-    );
-  }
-}
+  return (
+    <Fragment>
+      <StyledTitle>
+        <Typography
+          variant={'h6'}
+          color={'primary'}
+        >
+          {title}
+        </Typography>
+        {Object.keys(action).length
+          ? (
+            <Button
+              component={false}
+              linkTo={linkTo}
+              size={'small'}
+              square
+            >
+              {renderIcon(icon)}
+              {label}
+            </Button>
+          )
+          : null
+        }
+      </StyledTitle>
+      <Divider />
+    </Fragment>
+  );
+};
 
 PageTitle.propTypes = {
   action: PropTypes.shape({

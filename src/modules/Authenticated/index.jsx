@@ -9,6 +9,7 @@ import CharacterList from '../Character/CharacterList';
 import CharacterDetail from '../Character/CharacterDetail';
 import MainBar from '../../components/MainBar';
 
+import { getAttributes } from '../Attributes/actions';
 import { getCharacters } from '../Character/actions';
 
 import styles from './styles';
@@ -17,7 +18,14 @@ const Authenticated = ({ classes: { content } }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCharacters());
+    const init = async () => {
+      await Promise.all([
+        dispatch(getAttributes()),
+        dispatch(getCharacters()),
+      ]);
+    };
+
+    init();
   }, []);
 
   return (
