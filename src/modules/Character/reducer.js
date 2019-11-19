@@ -1,7 +1,13 @@
+import unionBy from 'lodash/unionBy';
+
 import {
   GET_REQUEST,
   GET_SUCCESS,
   GET_ERROR,
+
+  PATCH_REQUEST,
+  PATCH_SUCCESS,
+  PATCH_ERROR,
 } from './constants';
 
 const initialState = {
@@ -10,13 +16,29 @@ const initialState = {
   data: [],
 };
 
-const characterReducer = (state = initialState, { type, characters }) => {
+const characterReducer = (
+  state = initialState,
+  {
+    type,
+    characters,
+    character,
+  },
+) => {
   switch (type) {
     case GET_REQUEST:
+    case PATCH_REQUEST:
       return {
         loading: true,
         error: false,
-        data: [],
+        data: state.data,
+      };
+
+    case GET_ERROR:
+    case PATCH_ERROR:
+      return {
+        loading: false,
+        error: true,
+        data: state.data,
       };
 
     case GET_SUCCESS:
@@ -26,11 +48,11 @@ const characterReducer = (state = initialState, { type, characters }) => {
         data: characters,
       };
 
-    case GET_ERROR:
+    case PATCH_SUCCESS:
       return {
         loading: false,
-        error: true,
-        data: state.data,
+        error: false,
+        data: unionBy(state.date, [character], 'id'),
       };
 
     default:
